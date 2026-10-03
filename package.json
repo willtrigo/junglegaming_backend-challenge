@@ -1,0 +1,60 @@
+{
+  "name": "distributed-wagering-processor",
+  "version": "0.1.0",
+  "description": "Distributed wagering processor: idempotent, concurrency-safe financial transaction processing.",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "bun": ">=1.4.2"
+  },
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "dev:worker": "bun --watch src/worker.ts",
+    "start": "bun src/main.ts",
+    "start:worker": "bun src/worker.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "test": "bun test",
+    "check": "bun run typecheck && bun run lint && bun run test",
+    "infra:up": "docker compose up -d --build --wait --remove-orphans",
+    "infra:down": "docker compose down --remove-orphans",
+    "infra:logs": "docker compose logs -f --tail=100",
+    "infra:reset": "docker compose down --volumes --remove-orphans"
+  },
+  "mikro-orm": {
+    "configPaths": [
+      "./src/database/mikro-orm.config.ts"
+    ],
+    "useTsNode": false
+  },
+  "dependencies": {
+    "@aws-sdk/client-sqs": "3.1146.0",
+    "@mikro-orm/cli": "7.2.3",
+    "@mikro-orm/core": "7.2.3",
+    "@mikro-orm/migrations": "7.2.3",
+    "@mikro-orm/nestjs": "7.1.0",
+    "@mikro-orm/postgresql": "7.2.3",
+    "@nestjs/common": "12.1.2",
+    "@nestjs/core": "12.1.2",
+    "@nestjs/platform-express": "12.1.2",
+    "@nestjs/schedule": "12.0.2",
+    "@nestjs/terminus": "12.1.0",
+    "decimal.js": "10.6.0",
+    "nestjs-pino": "5.3.1",
+    "pino": "10.4.0",
+    "pino-http": "11.0.0",
+    "@prometheus-io/client": "0.16.1",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.15",
+    "@types/autocannon": "7.12.7",
+    "@types/bun": "1.4.2",
+    "autocannon": "8.0.0",
+    "typescript": "7.0.2"
+  }
+}

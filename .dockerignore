@@ -1,0 +1,31 @@
+# VCS and CI
+.git
+.gitignore
+.github
+ 
+# Dependencies are installed inside the image
+node_modules
+ 
+# Secrets and local environment (.env.example is allowed)
+.env
+.env.*
+!.env.example
+ 
+# Build, test and tooling output
+dist
+coverage
+load/results
+*.log
+*.tsbuildinfo
+ 
+# Docker files are not needed inside the build context
+docker-compose*.yml
+**/Dockerfile*
+.dockerignore
+ 
+# Documentation and editor files
+docs
+*.md
+.idea
+.vscode
+.DS_Store

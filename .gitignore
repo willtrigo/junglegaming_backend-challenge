@@ -1,0 +1,30 @@
+# Dependencies
+node_modules/
+ 
+# Build output
+dist/
+*.tsbuildinfo
+/build
+
+# Logs
+logs
+*.log
+logs/
+bun-debug.log*
+
+# OS
+.DS_Store
+
+# Test and coverage output
+/coverage
+/.nyc_output
+
+# Environment
+.env
+
+# Runtime data
+*.pid
+*.seed
+tmp/
+.tmp/
+.temp

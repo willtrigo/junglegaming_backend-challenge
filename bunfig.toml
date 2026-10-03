@@ -1,0 +1,10 @@
+[install]
+# Record exact versions in package.json instead of caret ranges.
+exact = true
+ 
+[test]
+# Coverage is opt-in: `bun test --coverage`.
+coverageSkipTestFiles = true
+coverageReporter = ["text", "lcov"]
+coverageDir = "coverage"
+coverageThreshold = { line = 0.8, function = 0.8, statement = 0.8 }
