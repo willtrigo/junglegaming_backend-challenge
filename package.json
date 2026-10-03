@@ -16,6 +16,11 @@
     "lint": "biome check .",
     "lint:fix": "biome check --write .",
     "format": "biome format --write .",
+    "migration:create": "mikro-orm migration:create --config ./src/database/mikro-orm.config.ts",
+    "migration:up": "mikro-orm migration:up --config ./src/database/mikro-orm.config.ts",
+    "migration:down": "mikro-orm migration:down --config ./src/database/mikro-orm.config.ts",
+    "migration:pending": "mikro-orm migration:pending --config ./src/database/mikro-orm.config.ts",
+    "migration:list": "mikro-orm migration:list --config ./src/database/mikro-orm.config.ts",
     "test": "bun test",
     "check": "bun run typecheck && bun run lint && bun run test",
     "infra:up": "docker compose up -d --build --wait --remove-orphans",
@@ -27,7 +32,8 @@
     "configPaths": [
       "./src/database/mikro-orm.config.ts"
     ],
-    "useTsNode": false
+    "preferTs": true,
+    "tsLoader": "tsx"
   },
   "dependencies": {
     "@aws-sdk/client-sqs": "3.1146.0",
@@ -41,11 +47,12 @@
     "@nestjs/platform-express": "12.1.2",
     "@nestjs/schedule": "12.0.2",
     "@nestjs/terminus": "12.1.0",
+    "@prometheus-io/client": "0.16.1",
     "decimal.js": "10.6.0",
+    "dotenv": "18.0.5",
     "nestjs-pino": "5.3.1",
     "pino": "10.4.0",
     "pino-http": "11.0.0",
-    "@prometheus-io/client": "0.16.1",
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "zod": "4.6.5"
@@ -55,6 +62,7 @@
     "@types/autocannon": "7.12.7",
     "@types/bun": "1.4.2",
     "autocannon": "8.0.0",
+    "tsx": "4.23.15",
     "typescript": "7.0.2"
   }
 }

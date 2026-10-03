@@ -1,7 +1,6 @@
-import { Controller, Get, ServiceUnavailableException } from "@nestjs/common";
-
 // biome-ignore lint/style/useImportType: NestJS DI needs the runtime class reference
-import { DatabaseService } from "../database/database.service";
+import { EntityManager } from "@mikro-orm/postgresql";
+import { Controller, Get, ServiceUnavailableException } from "@nestjs/common";
 
 interface HealthStatus {
   readonly status: "ok";
@@ -9,7 +8,7 @@ interface HealthStatus {
 
 @Controller("health")
 export class HealthController {
-  constructor(private readonly database: DatabaseService) {}
+  constructor(private readonly em: EntityManager) {}
 
   @Get("live")
   live(): HealthStatus {
@@ -19,9 +18,12 @@ export class HealthController {
   @Get("ready")
   async ready(): Promise<HealthStatus> {
     try {
-      await this.database.ping();
+      await this.em.getConnection().execute("SELECT 1");
     } catch {
-      throw new ServiceUnavailableException({ status: "unavailable", dependency: "postgres" });
+      throw new ServiceUnavailableException({
+        status: "unavailable",
+        dependency: "postgres",
+      });
     }
     return { status: "ok" };
   }
