@@ -18,6 +18,7 @@
     "format": "biome format --write .",
     "migration:create": "mikro-orm migration:create --config ./src/database/mikro-orm.config.ts",
     "migration:up": "mikro-orm migration:up --config ./src/database/mikro-orm.config.ts",
+    "infra:setup": "bun run infra:up && bun run migration:up",
     "migration:down": "mikro-orm migration:down --config ./src/database/mikro-orm.config.ts",
     "migration:pending": "mikro-orm migration:pending --config ./src/database/mikro-orm.config.ts",
     "migration:list": "mikro-orm migration:list --config ./src/database/mikro-orm.config.ts",
