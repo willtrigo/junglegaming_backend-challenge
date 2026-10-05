@@ -1,9 +1,10 @@
-import { MikroOrmModule } from "@mikro-orm/nestjs";
 import { Module } from "@nestjs/common";
+
 import { CreateWalletUseCase } from "./application/create-wallet.use-case";
+import { WalletsController } from "./presentation/wallets.controller";
 
 @Module({
-  imports: [MikroOrmModule.forFeature([])],
+  controllers: [WalletsController],
   providers: [CreateWalletUseCase],
   exports: [CreateWalletUseCase],
 })
